@@ -1,0 +1,3 @@
+## Data
+
+The data used in this project is stored in the `data/` folder of the repository. The file `shooting_data.rda` contains the dataset used for analysis.
