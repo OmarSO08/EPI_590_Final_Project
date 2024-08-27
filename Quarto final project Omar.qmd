@@ -17,16 +17,18 @@ Table of descriptive statistics:
 
 ```{r}
 library(gtsummary)
-tbl_summary(
+summary_table <- tbl_summary(
 	data = df,
 	by = State,
-	include = c(`Killed (includes shooter)`, `Number of Shots Fired`),
+	include = c(`Killed (includes shooter)`, `Number of Shots Fired`, `Number of Shooters`),
 	label = list(
 		`Killed (includes shooter)` ~ "Killed (includes shooter)",
 		`Number of Shots Fired` ~ "Number of Shots Fired"
 	),
 	missing_text = "Missing"
 )
+
+
 ```
 
 Linear regression model:
@@ -41,6 +43,8 @@ regression_table <- tbl_regression(
 	tidy_fun = broom.helpers::tidy_parameters
 )
 
+# Print the regression table
+regression_table
 
 ```
 
@@ -75,6 +79,8 @@ sd_per_state <- calculate_sd_per_state(df)
 print(sd_per_state)
 ```
 
-p-value of the regression coefficient for Number of Shots Fired
+Shooting Incidents in Connecticut:
+The number of times there has been only one shooter in shooting incidents in Connecticut (CT) is `r gtsummary::inline_text(summary_table, variable = "Number of Shooters", level = "1", column = "CT")`.
 
-
+P-value for Connecticut in Regression:
+The p-value for Connecticut (CT) in the regression analysis is `r  gtsummary:::inline_text.tbl_regression(regression_table, variable = "State", level = "CT",  column = "p-value")`.
