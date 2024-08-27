@@ -2,7 +2,7 @@
 install.packages("here")
 library(here)
 load(here("data", "shooting_data.rda"))
-df<- shooting_data
+df<- filter(shooting_data, State == "CA" | State == "TX" | State == "CT" | State == "GA" | State == "IL")
 
 
 #create a table of descriptive statistics

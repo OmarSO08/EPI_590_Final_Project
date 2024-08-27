@@ -14,9 +14,8 @@ Load the data
 ```{r}
 #| message: false
 library(here)
-
 load(here("data", "shooting_data.rda"))
-df<- shooting_data
+df<- dplyr::filter(shooting_data, State == "CA" | State == "TX" | State == "CT" | State == "GA" | State == "IL")  
 
 ```
 
@@ -36,7 +35,7 @@ summary_table <- tbl_summary(
 	missing_text = "Missing"
 )
 summary_table
-
+num_shoot <- gtsummary::inline_text(summary_table, variable = "Number of Shooters", level = "1", column = "CT")
 # Save the table as an HTML file
 library(htmltools)
 gt_table <- as_gt(summary_table)
@@ -50,14 +49,17 @@ Linear regression model:
 
 ```{r}
 #| message: false
+#| label: Reg
+#| tbl-cap: "Regression Analysis of Total Fatalities (Including Shooter) by State"
+
 library(broom.helpers)
 model <- lm(`Killed (includes shooter)` ~ `State`, data = df)
 # Create a regression table using tidy_parameters
 regression_table <- tbl_regression(
 	model,
-	title = "Regression Analysis of Total Fatalities (Including Shooter) by State",
 	tidy_fun = broom.helpers::tidy_parameters
 )
+
 
 # Print the regression table
 regression_table
@@ -67,7 +69,8 @@ regression_table
 Histogram of 'Killed (includes shooter)
 
 ```{r}
-#| label: fig1-histo
+#|  label: fig-hist
+#|  fig-cap: "Histogram of Killed (includes shooter)"
 library(ggplot2)
 fig_hist <- ggplot(df, aes(x = `Killed (includes shooter)`)) +
 	geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
@@ -78,8 +81,6 @@ fig_hist <- ggplot(df, aes(x = `Killed (includes shooter)`)) +
 
 fig_hist
 
-# Save the figure 
-ggsave(here("output", "fig1_histogram.png"), plot = fig_hist, width = 8, height = 6)
 
 ```
 
@@ -103,7 +104,7 @@ sd_per_state <- calculate_sd_per_state(df)
 print(sd_per_state)
 ```
 
-Shooting Incidents in Connecticut: The number of times there has been only one shooter in shooting incidents in Connecticut (CT) is `r gtsummary::inline_text(summary_table, variable = "Number of Shooters", level = "1", column = "CT")`.
+Shooting Incidents in Connecticut: The number of times there has been only one shooter in shooting incidents in Connecticut (CT) is `r num_shoot`.
 
 The standard deviation of the number of people killed (including the shooter) in Connecticut is `r sd_per_state |> filter(State == "CT") |> pull(SD_Killed)`.
 
@@ -111,7 +112,7 @@ The standard deviation of the number of people killed (including the shooter) in
 For the table: As shown in Table @tbl-sum, the descriptive statistics provide an overview of the data grouped by state.
 
 
-For the figure: The Figure @fig1-histo illustrates the distribution of the number of people killed, including the shooter.
+For the figure: The Figure @fig-hist illustrates the distribution of the number of people killed, including the shooter.
 
 
 
