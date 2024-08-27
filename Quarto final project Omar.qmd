@@ -87,7 +87,7 @@ hist <- ggplot(df, aes(x = `Killed (includes shooter)`)) +
 hist
 
 # Save the figure 
-ggsave(here("Quarto-final-project-Omar_files", "figure-html", "fig1_histogram.png"), plot = hist, width = 8, height = 6)
+ggsave(here("output", "fig1_histogram.png"), plot = hist, width = 8, height = 6)
 
 ```
 
