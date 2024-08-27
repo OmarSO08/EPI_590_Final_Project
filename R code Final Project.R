@@ -1,5 +1,7 @@
 # Load the data
-load("data/shooting_data.rda")
+install.packages("here")
+library(here)
+load(here("data", "shooting_data.rda"))
 df<- shooting_data
 
 
@@ -17,6 +19,12 @@ summary_table <- tbl_summary(
 )
 summary_table
 
+# Save the table as an HTML file
+library(htmltools)
+gt_table <- as_gt(summary_table)
+html_file <- here("output", "summary_table.html")
+save_html(gt_table, file = html_file)
+
 
 # Fit a linear regression model
 library(broom.helpers)
@@ -33,12 +41,15 @@ regression_table
 
 # Create a figure: Histogram of 'Killed (includes shooter)'
 library(ggplot2)
-ggplot(df, aes(x = `Killed (includes shooter)`)) +
+fig_hist <-ggplot(df, aes(x = `Killed (includes shooter)`)) +
 	geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
 	labs(title = "Histogram of Killed (includes shooter)",
 			 x = "Number of People Killed (including shooter)",
 			 y = "Frequency") +
 	theme_minimal()
+
+# Save the figure using the {here} package
+ggsave(here("output", "fig1_histogram.png"), plot = fig_hist, width = 8, height = 6)
 
 
 
