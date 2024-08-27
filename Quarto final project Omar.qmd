@@ -4,11 +4,17 @@ author: "Omar Souabni"
 format: html
 editor: visual
 ---
+Brief description of the data:
+
+The data set used in this analysis contains information about school shootings in the United States. Each row represents an individual shooting incident, with columns detailing various aspects of the incident. Key variables include the number of people killed (including the shooter), the number of shots fired, and the state where the shooting occurred.the data has been found in an open source online
+
 
 Load the data
 
 ```{r}
+#| message: false
 library(here)
+
 load(here("data", "shooting_data.rda"))
 df<- shooting_data
 
@@ -43,6 +49,7 @@ save_html(gt_table, file = html_file)
 Linear regression model:
 
 ```{r}
+#| message: false
 library(broom.helpers)
 model <- lm(`Killed (includes shooter)` ~ `State`, data = df)
 # Create a regression table using tidy_parameters
@@ -71,7 +78,7 @@ fig_hist <- ggplot(df, aes(x = `Killed (includes shooter)`)) +
 
 fig_hist
 
-# Save the figure using the {here} package
+# Save the figure 
 ggsave(here("output", "fig1_histogram.png"), plot = fig_hist, width = 8, height = 6)
 
 ```
@@ -79,6 +86,7 @@ ggsave(here("output", "fig1_histogram.png"), plot = fig_hist, width = 8, height 
 Write a function to calculate standard deviation of 'Killed (includes shooter)' for each state
 
 ```{r}
+#| message: false
 library(dplyr)
 calculate_sd_per_state <- function(data) {
 
