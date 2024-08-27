@@ -5,17 +5,17 @@ df<- shooting_data
 
 #create a table of descriptive statistics
 library(gtsummary)
-tbl_summary(
+summary_table <- tbl_summary(
 	data = df,
 	by = State,
-	include = c(`Killed (includes shooter)`, `Number of Shots Fired`),
+	include = c(`Killed (includes shooter)`, `Number of Shots Fired`, `Number of Shooters`),
 	label = list(
 		`Killed (includes shooter)` ~ "Killed (includes shooter)",
 		`Number of Shots Fired` ~ "Number of Shots Fired"
 	),
 	missing_text = "Missing"
 )
-
+summary_table
 
 
 # Fit a linear regression model
@@ -46,8 +46,8 @@ ggplot(df, aes(x = `Killed (includes shooter)`)) +
 library(dplyr)
 calculate_sd_per_state <- function(data) {
 
-	result <- data %>%
-		group_by(State) %>%
+	result <- data |>
+		group_by(State) |>
 		summarise(SD_Killed = sd(`Killed (includes shooter)`, na.rm = TRUE))
 
 
@@ -57,5 +57,4 @@ calculate_sd_per_state <- function(data) {
 sd_per_state <- calculate_sd_per_state(df)
 
 print(sd_per_state)
-
 

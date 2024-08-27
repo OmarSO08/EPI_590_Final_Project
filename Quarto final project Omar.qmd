@@ -27,7 +27,7 @@ summary_table <- tbl_summary(
 	),
 	missing_text = "Missing"
 )
-
+summary_table
 
 ```
 
@@ -79,8 +79,9 @@ sd_per_state <- calculate_sd_per_state(df)
 print(sd_per_state)
 ```
 
-Shooting Incidents in Connecticut:
-The number of times there has been only one shooter in shooting incidents in Connecticut (CT) is `r gtsummary::inline_text(summary_table, variable = "Number of Shooters", level = "1", column = "CT")`.
+Shooting Incidents in Connecticut: The number of times there has been only one shooter in shooting incidents in Connecticut (CT) is `r gtsummary::inline_text(summary_table, variable = "Number of Shooters", level = "1", column = "CT")`.
 
-P-value for Connecticut in Regression:
-The p-value for Connecticut (CT) in the regression analysis is `r  gtsummary:::inline_text.tbl_regression(regression_table, variable = "State", level = "CT",  column = "p-value")`.
+The standard deviation of the number of people killed (including the shooter) in Connecticut is `r sd_per_state |> filter(State == "CT") |> pull(SD_Killed)`.
+
+
+
