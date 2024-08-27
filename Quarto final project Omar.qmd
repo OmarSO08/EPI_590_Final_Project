@@ -1,9 +1,19 @@
-# Load the data
+---
+title: "School Shooting Analysis"
+author: "Omar Souabni"
+format: html
+editor: visual
+---
+Load the data
+```{r}
 load("data/shooting_data.rda")
 df<- shooting_data
 
+```
 
-#create a table of descriptive statistics
+Table of descriptive statistics:
+
+```{r}
 library(gtsummary)
 tbl_summary(
 	data = df,
@@ -15,15 +25,15 @@ tbl_summary(
 	),
 	missing_text = "Missing"
 )
+```
 
-
-
-# Fit a linear regression model
+Linear regression model:
+```{r}
 model <- lm(`Killed (includes shooter)` ~ `Number of Shots Fired`, data = df)
 
-
-
-# Create a figure: Histogram of 'Killed (includes shooter)'
+```
+Histogram of 'Killed (includes shooter)
+```{r}
 library(ggplot2)
 ggplot(df, aes(x = `Killed (includes shooter)`)) +
 	geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
@@ -31,10 +41,9 @@ ggplot(df, aes(x = `Killed (includes shooter)`)) +
 			 x = "Number of People Killed (including shooter)",
 			 y = "Frequency") +
 	theme_minimal()
-
-
-
-# Write a function to calculate standard deviation of 'Killed (includes shooter)' for each state
+```
+Write a function to calculate standard deviation of 'Killed (includes shooter)' for each state
+```{r}
 library(dplyr)
 calculate_sd_per_state <- function(data) {
 
@@ -49,5 +58,9 @@ calculate_sd_per_state <- function(data) {
 sd_per_state <- calculate_sd_per_state(df)
 
 print(sd_per_state)
-
-
+```
+p-value of the regression coefficient for Number of Shots Fired
+```{r}
+# Extract and print the p-value for 'Number of Shots Fired' using inline_text() in a Quarto/R Markdown document
+p_value_text <- inline_text(regression_table, variable = "Number of Shots Fired")
+```
