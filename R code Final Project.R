@@ -19,9 +19,17 @@ tbl_summary(
 
 
 # Fit a linear regression model
-model <- lm(`Killed (includes shooter)` ~ `Number of Shots Fired`, data = df)
+library(broom.helpers)
+model <- lm(`Killed (includes shooter)` ~ `State`, data = df)
+# Create a regression table using tidy_parameters
+regression_table <- tbl_regression(
+	model,
+	title = "Regression Analysis of Total Fatalities (Including Shooter) by State",
+	tidy_fun = broom.helpers::tidy_parameters
+)
 
-
+# Print the regression table
+regression_table
 
 # Create a figure: Histogram of 'Killed (includes shooter)'
 library(ggplot2)
