@@ -105,41 +105,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Load the data</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/shooting_data.rda"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span> shooting_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at C:/Users/omarr/Documents/MPH/Fall 2/EPI 590/Epi590_Final_Project_Omar</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"shooting_data.rda"</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span> shooting_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Table of descriptive statistics:</p>
 <div id="tbl-sum" class="cell anchored">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> State,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Number of Shots Fired</span><span class="st">`</span>, <span class="st">`</span><span class="at">Number of Shooters</span><span class="st">`</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">"Killed (includes shooter)"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">Number of Shots Fired</span><span class="st">`</span> <span class="sc">~</span> <span class="st">"Number of Shots Fired"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_text =</span> <span class="st">"Missing"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>summary_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> <span class="fu">tbl_summary</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> State,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span>, <span class="st">`</span><span class="at">Number of Shots Fired</span><span class="st">`</span>, <span class="st">`</span><span class="at">Number of Shooters</span><span class="st">`</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">"Killed (includes shooter)"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">Number of Shots Fired</span><span class="st">`</span> <span class="sc">~</span> <span class="st">"Number of Shots Fired"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_text =</span> <span class="st">"Missing"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>summary_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="tqtqbogywh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tqtqbogywh table {
+<div id="rhxxejwtpl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rhxxejwtpl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tqtqbogywh thead, #tqtqbogywh tbody, #tqtqbogywh tfoot, #tqtqbogywh tr, #tqtqbogywh td, #tqtqbogywh th {
+#rhxxejwtpl thead, #rhxxejwtpl tbody, #rhxxejwtpl tfoot, #rhxxejwtpl tr, #rhxxejwtpl td, #rhxxejwtpl th {
   border-style: none;
 }
 
-#tqtqbogywh p {
+#rhxxejwtpl p {
   margin: 0;
   padding: 0;
 }
 
-#tqtqbogywh .gt_table {
+#rhxxejwtpl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -165,12 +169,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_caption {
+#rhxxejwtpl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tqtqbogywh .gt_title {
+#rhxxejwtpl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -182,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#tqtqbogywh .gt_subtitle {
+#rhxxejwtpl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -194,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#tqtqbogywh .gt_heading {
+#rhxxejwtpl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -206,13 +210,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_bottom_border {
+#rhxxejwtpl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_col_headings {
+#rhxxejwtpl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -227,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_col_heading {
+#rhxxejwtpl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -247,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#tqtqbogywh .gt_column_spanner_outer {
+#rhxxejwtpl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -259,15 +263,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#tqtqbogywh .gt_column_spanner_outer:first-child {
+#rhxxejwtpl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tqtqbogywh .gt_column_spanner_outer:last-child {
+#rhxxejwtpl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tqtqbogywh .gt_column_spanner {
+#rhxxejwtpl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -279,11 +283,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#tqtqbogywh .gt_spanner_row {
+#rhxxejwtpl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tqtqbogywh .gt_group_heading {
+#rhxxejwtpl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -309,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#tqtqbogywh .gt_empty_group_heading {
+#rhxxejwtpl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -324,15 +328,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#tqtqbogywh .gt_from_md > :first-child {
+#rhxxejwtpl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tqtqbogywh .gt_from_md > :last-child {
+#rhxxejwtpl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tqtqbogywh .gt_row {
+#rhxxejwtpl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -351,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#tqtqbogywh .gt_stub {
+#rhxxejwtpl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -364,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tqtqbogywh .gt_stub_row_group {
+#rhxxejwtpl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -378,15 +382,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#tqtqbogywh .gt_row_group_first td {
+#rhxxejwtpl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tqtqbogywh .gt_row_group_first th {
+#rhxxejwtpl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tqtqbogywh .gt_summary_row {
+#rhxxejwtpl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -396,16 +400,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tqtqbogywh .gt_first_summary_row {
+#rhxxejwtpl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_first_summary_row.thick {
+#rhxxejwtpl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tqtqbogywh .gt_last_summary_row {
+#rhxxejwtpl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -415,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_grand_summary_row {
+#rhxxejwtpl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -425,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tqtqbogywh .gt_first_grand_summary_row {
+#rhxxejwtpl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -435,7 +439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_last_grand_summary_row_top {
+#rhxxejwtpl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -445,11 +449,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_striped {
+#rhxxejwtpl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tqtqbogywh .gt_table_body {
+#rhxxejwtpl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -458,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_footnotes {
+#rhxxejwtpl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -472,7 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_footnote {
+#rhxxejwtpl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -481,7 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tqtqbogywh .gt_sourcenotes {
+#rhxxejwtpl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -495,7 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#tqtqbogywh .gt_sourcenote {
+#rhxxejwtpl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -503,72 +507,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#tqtqbogywh .gt_left {
+#rhxxejwtpl .gt_left {
   text-align: left;
 }
 
-#tqtqbogywh .gt_center {
+#rhxxejwtpl .gt_center {
   text-align: center;
 }
 
-#tqtqbogywh .gt_right {
+#rhxxejwtpl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tqtqbogywh .gt_font_normal {
+#rhxxejwtpl .gt_font_normal {
   font-weight: normal;
 }
 
-#tqtqbogywh .gt_font_bold {
+#rhxxejwtpl .gt_font_bold {
   font-weight: bold;
 }
 
-#tqtqbogywh .gt_font_italic {
+#rhxxejwtpl .gt_font_italic {
   font-style: italic;
 }
 
-#tqtqbogywh .gt_super {
+#rhxxejwtpl .gt_super {
   font-size: 65%;
 }
 
-#tqtqbogywh .gt_footnote_marks {
+#rhxxejwtpl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tqtqbogywh .gt_asterisk {
+#rhxxejwtpl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tqtqbogywh .gt_indent_1 {
+#rhxxejwtpl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tqtqbogywh .gt_indent_2 {
+#rhxxejwtpl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tqtqbogywh .gt_indent_3 {
+#rhxxejwtpl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tqtqbogywh .gt_indent_4 {
+#rhxxejwtpl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tqtqbogywh .gt_indent_5 {
+#rhxxejwtpl .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tqtqbogywh .katex-display {
+#rhxxejwtpl .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tqtqbogywh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rhxxejwtpl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1619,10 +1623,15 @@ N = 2</p>
 
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the table as an HTML file</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmltools)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>gt_table <span class="ot">&lt;-</span> <span class="fu">as_gt</span>(summary_table)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>html_file <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"output"</span>, <span class="st">"summary_table.html"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">save_html</span>(gt_table, <span class="at">file =</span> html_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Linear regression model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.helpers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.helpers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attachement du package : 'broom.helpers'</code></pre>
@@ -1633,34 +1642,34 @@ Attachement du package : 'broom.helpers'</code></pre>
     all_categorical, all_continuous, all_contrasts, all_dichotomous,
     all_interaction, all_intercepts</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">State</span><span class="st">`</span>, <span class="at">data =</span> df)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a regression table using tidy_parameters</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>regression_table <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    model,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Regression Analysis of Total Fatalities (Including Shooter) by State"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">tidy_fun =</span> broom.helpers<span class="sc">::</span>tidy_parameters</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the regression table</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>regression_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span> <span class="sc">~</span> <span class="st">`</span><span class="at">State</span><span class="st">`</span>, <span class="at">data =</span> df)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a regression table using tidy_parameters</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>regression_table <span class="ot">&lt;-</span> <span class="fu">tbl_regression</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    model,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Regression Analysis of Total Fatalities (Including Shooter) by State"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">tidy_fun =</span> broom.helpers<span class="sc">::</span>tidy_parameters</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the regression table</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>regression_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="lyzlklyksa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lyzlklyksa table {
+<div id="qzsrgekehb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qzsrgekehb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lyzlklyksa thead, #lyzlklyksa tbody, #lyzlklyksa tfoot, #lyzlklyksa tr, #lyzlklyksa td, #lyzlklyksa th {
+#qzsrgekehb thead, #qzsrgekehb tbody, #qzsrgekehb tfoot, #qzsrgekehb tr, #qzsrgekehb td, #qzsrgekehb th {
   border-style: none;
 }
 
-#lyzlklyksa p {
+#qzsrgekehb p {
   margin: 0;
   padding: 0;
 }
 
-#lyzlklyksa .gt_table {
+#qzsrgekehb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1686,12 +1695,12 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_caption {
+#qzsrgekehb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lyzlklyksa .gt_title {
+#qzsrgekehb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1703,7 +1712,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-bottom-width: 0;
 }
 
-#lyzlklyksa .gt_subtitle {
+#qzsrgekehb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1715,7 +1724,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-top-width: 0;
 }
 
-#lyzlklyksa .gt_heading {
+#qzsrgekehb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1727,13 +1736,13 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_bottom_border {
+#qzsrgekehb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_col_headings {
+#qzsrgekehb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1748,7 +1757,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_col_heading {
+#qzsrgekehb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1768,7 +1777,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   overflow-x: hidden;
 }
 
-#lyzlklyksa .gt_column_spanner_outer {
+#qzsrgekehb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1780,15 +1789,15 @@ Attachement du package : 'broom.helpers'</code></pre>
   padding-right: 4px;
 }
 
-#lyzlklyksa .gt_column_spanner_outer:first-child {
+#qzsrgekehb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lyzlklyksa .gt_column_spanner_outer:last-child {
+#qzsrgekehb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lyzlklyksa .gt_column_spanner {
+#qzsrgekehb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1800,11 +1809,11 @@ Attachement du package : 'broom.helpers'</code></pre>
   width: 100%;
 }
 
-#lyzlklyksa .gt_spanner_row {
+#qzsrgekehb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lyzlklyksa .gt_group_heading {
+#qzsrgekehb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1830,7 +1839,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   text-align: left;
 }
 
-#lyzlklyksa .gt_empty_group_heading {
+#qzsrgekehb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1845,15 +1854,15 @@ Attachement du package : 'broom.helpers'</code></pre>
   vertical-align: middle;
 }
 
-#lyzlklyksa .gt_from_md > :first-child {
+#qzsrgekehb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lyzlklyksa .gt_from_md > :last-child {
+#qzsrgekehb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lyzlklyksa .gt_row {
+#qzsrgekehb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1872,7 +1881,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   overflow-x: hidden;
 }
 
-#lyzlklyksa .gt_stub {
+#qzsrgekehb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1885,7 +1894,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   padding-right: 5px;
 }
 
-#lyzlklyksa .gt_stub_row_group {
+#qzsrgekehb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1899,15 +1908,15 @@ Attachement du package : 'broom.helpers'</code></pre>
   vertical-align: top;
 }
 
-#lyzlklyksa .gt_row_group_first td {
+#qzsrgekehb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lyzlklyksa .gt_row_group_first th {
+#qzsrgekehb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lyzlklyksa .gt_summary_row {
+#qzsrgekehb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1917,16 +1926,16 @@ Attachement du package : 'broom.helpers'</code></pre>
   padding-right: 5px;
 }
 
-#lyzlklyksa .gt_first_summary_row {
+#qzsrgekehb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_first_summary_row.thick {
+#qzsrgekehb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lyzlklyksa .gt_last_summary_row {
+#qzsrgekehb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1936,7 +1945,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_grand_summary_row {
+#qzsrgekehb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1946,7 +1955,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   padding-right: 5px;
 }
 
-#lyzlklyksa .gt_first_grand_summary_row {
+#qzsrgekehb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1956,7 +1965,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_last_grand_summary_row_top {
+#qzsrgekehb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1966,11 +1975,11 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_striped {
+#qzsrgekehb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lyzlklyksa .gt_table_body {
+#qzsrgekehb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1979,7 +1988,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_footnotes {
+#qzsrgekehb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1993,7 +2002,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_footnote {
+#qzsrgekehb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2002,7 +2011,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   padding-right: 5px;
 }
 
-#lyzlklyksa .gt_sourcenotes {
+#qzsrgekehb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2016,7 +2025,7 @@ Attachement du package : 'broom.helpers'</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lyzlklyksa .gt_sourcenote {
+#qzsrgekehb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2024,72 +2033,72 @@ Attachement du package : 'broom.helpers'</code></pre>
   padding-right: 5px;
 }
 
-#lyzlklyksa .gt_left {
+#qzsrgekehb .gt_left {
   text-align: left;
 }
 
-#lyzlklyksa .gt_center {
+#qzsrgekehb .gt_center {
   text-align: center;
 }
 
-#lyzlklyksa .gt_right {
+#qzsrgekehb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lyzlklyksa .gt_font_normal {
+#qzsrgekehb .gt_font_normal {
   font-weight: normal;
 }
 
-#lyzlklyksa .gt_font_bold {
+#qzsrgekehb .gt_font_bold {
   font-weight: bold;
 }
 
-#lyzlklyksa .gt_font_italic {
+#qzsrgekehb .gt_font_italic {
   font-style: italic;
 }
 
-#lyzlklyksa .gt_super {
+#qzsrgekehb .gt_super {
   font-size: 65%;
 }
 
-#lyzlklyksa .gt_footnote_marks {
+#qzsrgekehb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lyzlklyksa .gt_asterisk {
+#qzsrgekehb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lyzlklyksa .gt_indent_1 {
+#qzsrgekehb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lyzlklyksa .gt_indent_2 {
+#qzsrgekehb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lyzlklyksa .gt_indent_3 {
+#qzsrgekehb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lyzlklyksa .gt_indent_4 {
+#qzsrgekehb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lyzlklyksa .gt_indent_5 {
+#qzsrgekehb .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lyzlklyksa .katex-display {
+#qzsrgekehb .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lyzlklyksa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qzsrgekehb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2451,15 +2460,15 @@ Attachement du package : 'broom.helpers'</code></pre>
 </div>
 <p>Histogram of ’Killed (includes shooter)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Killed (includes shooter)"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="st">"Number of People Killed (including shooter)"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>fig_hist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fig_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Killed (includes shooter)"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="st">"Number of People Killed (including shooter)"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>fig_hist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2467,10 +2476,12 @@ Attachement du package : 'broom.helpers'</code></pre>
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the figure using the {here} package</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">here</span>(<span class="st">"output"</span>, <span class="st">"fig1_histogram.png"</span>), <span class="at">plot =</span> fig_hist, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Write a function to calculate standard deviation of ‘Killed (includes shooter)’ for each state</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attachement du package : 'dplyr'</code></pre>
@@ -2485,19 +2496,19 @@ Attachement du package : 'dplyr'</code></pre>
 
     intersect, setdiff, setequal, union</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>calculate_sd_per_state <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(State) <span class="sc">|&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">SD_Killed =</span> <span class="fu">sd</span>(<span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(result)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the function to calculate standard deviation of 'Killed (includes shooter)' for each state</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>sd_per_state <span class="ot">&lt;-</span> <span class="fu">calculate_sd_per_state</span>(df)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sd_per_state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>calculate_sd_per_state <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    result <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(State) <span class="sc">|&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">SD_Killed =</span> <span class="fu">sd</span>(<span class="st">`</span><span class="at">Killed (includes shooter)</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(result)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the function to calculate standard deviation of 'Killed (includes shooter)' for each state</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>sd_per_state <span class="ot">&lt;-</span> <span class="fu">calculate_sd_per_state</span>(df)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sd_per_state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 52 × 2
    State SD_Killed
@@ -2517,8 +2528,8 @@ Attachement du package : 'dplyr'</code></pre>
 </div>
 <p>Shooting Incidents in Connecticut: The number of times there has been only one shooter in shooting incidents in Connecticut (CT) is 18 (100%).</p>
 <p>The standard deviation of the number of people killed (including the shooter) in Connecticut is 6.3646502.</p>
-<p>As shown in Table <strong>?@tbl-sum</strong>, the descriptive statistics provide an overview of the data grouped by state.</p>
-<p>the Figure <span class="citation" data-cites="fig1-histo">@fig1-histo</span> illustrates the distribution of the number of people killed, including the shooter.</p>
+<p>For the table: As shown in Table <strong>?@tbl-sum</strong>, the descriptive statistics provide an overview of the data grouped by state.</p>
+<p>For the figure: The Figure <span class="citation" data-cites="fig1-histo">@fig1-histo</span> illustrates the distribution of the number of people killed, including the shooter.</p>
 
 </main>
 <!-- /main column -->
