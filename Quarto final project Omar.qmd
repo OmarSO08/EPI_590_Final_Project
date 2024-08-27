@@ -16,6 +16,7 @@ df<- shooting_data
 Table of descriptive statistics:
 
 ```{r}
+#| label: tbl-sum
 library(gtsummary)
 summary_table <- tbl_summary(
 	data = df,
@@ -51,13 +52,16 @@ regression_table
 Histogram of 'Killed (includes shooter)
 
 ```{r}
+#| label: fig1-histo
 library(ggplot2)
-ggplot(df, aes(x = `Killed (includes shooter)`)) +
+fig_hist <- ggplot(df, aes(x = `Killed (includes shooter)`)) +
 	geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
 	labs(title = "Histogram of Killed (includes shooter)",
 			 x = "Number of People Killed (including shooter)",
 			 y = "Frequency") +
 	theme_minimal()
+
+fig_hist
 ```
 
 Write a function to calculate standard deviation of 'Killed (includes shooter)' for each state
@@ -66,8 +70,8 @@ Write a function to calculate standard deviation of 'Killed (includes shooter)' 
 library(dplyr)
 calculate_sd_per_state <- function(data) {
 
-	result <- data %>%
-		group_by(State) %>%
+	result <- data |>
+		group_by(State) |>
 		summarise(SD_Killed = sd(`Killed (includes shooter)`, na.rm = TRUE))
 
 
@@ -82,6 +86,12 @@ print(sd_per_state)
 Shooting Incidents in Connecticut: The number of times there has been only one shooter in shooting incidents in Connecticut (CT) is `r gtsummary::inline_text(summary_table, variable = "Number of Shooters", level = "1", column = "CT")`.
 
 The standard deviation of the number of people killed (including the shooter) in Connecticut is `r sd_per_state |> filter(State == "CT") |> pull(SD_Killed)`.
+
+
+As shown in Table @tbl-sum, the descriptive statistics provide an overview of the data grouped by state.
+
+
+the Figure @fig1-histo illustrates the distribution of the number of people killed, including the shooter.
 
 
 
