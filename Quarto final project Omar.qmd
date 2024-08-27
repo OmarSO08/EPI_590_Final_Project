@@ -3,6 +3,8 @@ title: "School Shooting Analysis"
 author: "Omar Souabni"
 format: html
 editor: visual
+embed-resources: true
+self-contained: true
 ---
 Brief description of the data:
 
@@ -23,6 +25,7 @@ Table of descriptive statistics:
 
 ```{r}
 #| label: tbl-sum
+#| tbl-cap: "Summary table"
 library(gtsummary)
 summary_table <- tbl_summary(
 	data = df,
@@ -69,18 +72,22 @@ regression_table
 Histogram of 'Killed (includes shooter)
 
 ```{r}
-#|  label: fig-hist
-#|  fig-cap: "Histogram of Killed (includes shooter)"
+#| label: fig-hist
+#| fig-cap: "Histogram of Killed (includes shooter)"
+
+
 library(ggplot2)
-fig_hist <- ggplot(df, aes(x = `Killed (includes shooter)`)) +
+hist <- ggplot(df, aes(x = `Killed (includes shooter)`)) +
 	geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
 	labs(title = "Histogram of Killed (includes shooter)",
 			 x = "Number of People Killed (including shooter)",
 			 y = "Frequency") +
 	theme_minimal()
 
-fig_hist
+hist
 
+# Save the figure 
+ggsave(here("Quarto-final-project-Omar_files", "figure-html", "fig1_histogram.png"), plot = hist, width = 8, height = 6)
 
 ```
 
